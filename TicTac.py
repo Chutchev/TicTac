@@ -110,12 +110,9 @@ def main():
     game_field = ['|_0_|', '|_1_|', '|_2_|', '|_3_|', '|_4_|', '|_5_|', '|_6_|', '|_7_|', '|_8_|']
     moves_list = [i for i in range(0, 9)]
     first = first_move(player)
-    print(first)
     if first == 'player':
-        print("player")
         first_player(game_field, moves_list, player, comp)
     else:
-        print('comp')
         first_comp(game_field, moves_list, player, comp)
 
 
