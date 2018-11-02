@@ -3,7 +3,7 @@ import random
 
 def player_choose():
     player = input("За кого вы будете играть?\n")
-    if player.lower() != 'x' and player.lower() != 'o':
+    if player.lower() != 'x' and player.lower() != 'o' and player.lower() != 'х' and player.lower() != 'о':
         player_choose()
     if player.lower() == 'x':
         comp = 'o'
