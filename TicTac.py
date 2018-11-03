@@ -1,11 +1,12 @@
 import random
+from sys import exit
 
 
 def player_choose():
     player = input("За кого вы будете играть?\n")
     while player.lower() != 'x' and player.lower() != 'o' and player.lower() != 'х' and player.lower() != 'о':
         player = input("За кого вы будете играть?\n")
-    if player.lower() == 'x':
+    if player.lower() == 'x' or player.lower() == 'х':
         comp = 'o'
     else:
         comp = 'x'
@@ -13,7 +14,7 @@ def player_choose():
 
 
 def first_move(player):
-    if player.lower() == 'x':
+    if player.lower() == 'x' or player.lower() == 'х':
         return 'player'
     else:
         return 'comp'
@@ -50,32 +51,39 @@ def print_game_field(game_field):
     print()
 
 
-def check_winner(game_field):
+def check_winner(game_field, moves_list):
     continue_game = True
-    for index in range(3):
+    for index in range(0, 6, 3):
         if game_field[index] == game_field[index+1] and game_field[index] == game_field[index + 2]:
             continue_game = False
-        elif game_field[index] == game_field[index + 3] and game_field[index] == game_field[index + 6]:
+    for index in range(3):
+        if game_field[index] == game_field[index + 3] and game_field[index] == game_field[index + 6]:
             continue_game = False
     if game_field[0] == game_field[4] and game_field[0] == game_field[8]:
         continue_game = False
     elif game_field[2] == game_field[4] and game_field[2] == game_field[6]:
         continue_game = False
+    if len(moves_list) == 0 and continue_game == True:
+        print('Ничья')
+        print_game_field(game_field)
+        exit(0)
     return continue_game
 
 
 def first_player_move(game_field, moves_list, player, comp):
     while True:
         print_game_field(game_field)
-        if len(moves_list) > 0 and check_winner(game_field):
+        if len(moves_list) > 0 and check_winner(game_field, moves_list):
             player_move(game_field, moves_list, player)
         else:
+            check_winner(game_field, moves_list)
             print_game_field(game_field)
             print('Выиграл компьютер!')
             break
-        if len(moves_list) > 0 and check_winner(game_field):
+        if len(moves_list) > 0 and check_winner(game_field, moves_list):
             comp_move(game_field, moves_list, comp)
         else:
+            check_winner(game_field, moves_list)
             print_game_field(game_field)
             print('Вы выиграли!')
             break
@@ -87,12 +95,14 @@ def first_comp_move(game_field, moves_list, player, comp):
             comp_move(game_field, moves_list, comp)
             print_game_field(game_field)
         else:
+            check_winner(game_field, moves_list)
             print_game_field(game_field)
             print('Вы выиграли!')
             break
         if len(moves_list) > 0 and check_winner(game_field):
             player_move(game_field, moves_list, player)
         else:
+            check_winner(game_field, moves_list)
             print_game_field(game_field)
             print('Выиграл компьютер!')
             break
