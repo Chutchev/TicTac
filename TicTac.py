@@ -91,7 +91,7 @@ def first_player_move(game_field, moves_list, player, comp):
 
 def first_comp_move(game_field, moves_list, player, comp):
     while True:
-        if len(moves_list) > 0 and check_winner(game_field):
+        if len(moves_list) > 0 and check_winner(game_field, moves_list):
             comp_move(game_field, moves_list, comp)
             print_game_field(game_field)
         else:
@@ -99,7 +99,7 @@ def first_comp_move(game_field, moves_list, player, comp):
             print_game_field(game_field)
             print('Вы выиграли!')
             break
-        if len(moves_list) > 0 and check_winner(game_field):
+        if len(moves_list) > 0 and check_winner(game_field, moves_list):
             player_move(game_field, moves_list, player)
         else:
             check_winner(game_field, moves_list)
